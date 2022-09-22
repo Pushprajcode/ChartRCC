@@ -1,4 +1,4 @@
-import COLORS from './colors';
+import COLORS from '../../utiles/colors';
 export const PieChartData = [
   {
     name: 'Seoul',
@@ -17,14 +17,14 @@ export const PieChartData = [
   {
     name: 'Beijing',
     population: 52,
-    color: 'red',
+    color: COLORS.GREY,
     legendFontColor: COLORS.DARK_GREY,
     legendFontSize: 15,
   },
   {
     name: 'New York',
     population: 85,
-    color: COLORS.WHITE,
+    color: COLORS.PRIMARY_BLUE,
     legendFontColor: COLORS.DARK_GREY,
     legendFontSize: 15,
   },
@@ -37,10 +37,10 @@ export const PieChartData = [
   },
 ];
 export const BarchartData = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+  labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
   datasets: [
     {
-      data: [20, 45, 28, 80, 99, 43],
+      data: [10, 20, 30, 40, 50, 60],
     },
   ],
 };

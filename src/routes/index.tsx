@@ -11,14 +11,14 @@ export default function NavigationScreen() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name={ROUTE_NAME.PIECHART_SCREEN}
           component={PieChartScreen}
-        />
-        <Stack.Screen
+        /> */}
+        {/* <Stack.Screen
           name={ROUTE_NAME.BARCHART_SCREEN}
           component={BarchartScreen}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

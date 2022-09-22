@@ -1,60 +1,42 @@
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Dimensions, StyleSheet, View} from 'react-native';
 import React from 'react';
-import {PieChartData} from '../../utiles/datasets';
+import {PieChartData} from '../barchart/datasets';
 import {PieChart} from 'react-native-chart-kit';
 import COLORS from '../../utiles/colors';
 
-export default function Index(props: any) {
-  const screenWidth = Dimensions.get('window').width;
-  const {height} = props;
-  console.log('rrrr', height);
-
+interface PiechartProps {
+  width: number;
+  height: number;
+  backgroundColor: string;
+  paddingLeft: string;
+}
+export default function PieScreen(props: PiechartProps) {
+  const {width, height, backgroundColor, paddingLeft} = props;
   return (
-    <View style={styles.containerView}>
+    <View>
       <PieChart
         data={PieChartData}
-        width={screenWidth}
-        height={400}
+        width={width}
+        height={height}
         accessor={'population'}
-        backgroundColor={'transparent'}
-        paddingLeft={'15'}
-        center={[10, 50]}
+        backgroundColor={backgroundColor}
+        paddingLeft={paddingLeft}
         chartConfig={{
           strokeWidth: 3,
           barPercentage: 0.5,
-          backgroundColor: '#e26a00',
-          backgroundGradientFrom: '#fb8c00',
-          backgroundGradientTo: '#ffa726',
-          decimalPlaces: 5, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          decimalPlaces: 5,
+          color: () => COLORS.DOGER_BLUE,
+          labelColor: () => COLORS.RED,
           style: {
             borderRadius: 16,
           },
           propsForDots: {
             r: '6',
             strokeWidth: '2',
-            stroke: '#ffa726',
           },
           propsForLabels: {},
         }}
       />
-      <TouchableOpacity>
-        <Text>{'NEXT'}</Text>
-      </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  containerView: {
-    flex: 1,
-    // backgroundColor: COLORS.BLACK,
-  },
-});

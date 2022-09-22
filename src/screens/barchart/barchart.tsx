@@ -1,44 +1,56 @@
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
 import {BarChart} from 'react-native-chart-kit';
-import {BarchartData} from '../../utiles/datasets';
+import {Dimensions} from 'react-native';
+import {BarchartData} from './datasets';
+import COLORS from '../../utiles/colors';
+import React from 'react';
 
 const screenWidth = Dimensions.get('window').width;
-export default function BarchartScreen() {
+interface BarchartProps {
+  yAxisLabel?: string;
+  height?: number;
+  verticalLabelRotation: number;
+  horizontalLabelRotation: number;
+  fromZero: boolean;
+  style: any;
+  yAxisSuffix: string;
+}
+export default function BarchartScreen(props: BarchartProps) {
+  const {
+    yAxisLabel = '$',
+    yAxisSuffix = 'k',
+    height = 100,
+    verticalLabelRotation = 4,
+    horizontalLabelRotation = 3,
+    fromZero = false,
+    style,
+  } = props;
   return (
-    <View style={{flex: 1}}>
-      <BarChart
-        style={graphStyle}
-        data={BarchartData}
-        width={screenWidth}
-        height={220}
-        yAxisLabel="$"
-        verticalLabelRotation={30}
-        chartConfig={{
-          backgroundColor: '#e26a00',
-          backgroundGradientFrom: '#fb8c00',
-          backgroundGradientTo: '#ffa726',
-          decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
-          propsForDots: {
-            r: '6',
-            strokeWidth: '2',
-            stroke: '#ffa726',
-          },
-        }}
-      />
-    </View>
+    <BarChart
+      data={BarchartData}
+      width={screenWidth}
+      height={height}
+      yAxisLabel={yAxisLabel}
+      yAxisSuffix={yAxisSuffix}
+      verticalLabelRotation={verticalLabelRotation}
+      horizontalLabelRotation={horizontalLabelRotation}
+      fromZero={fromZero} //optional prop
+      style={style}
+      chartConfig={{
+        height: 500,
+        backgroundGradientFrom: COLORS.WHITE,
+        backgroundGradientTo: COLORS.WHITE,
+        fillShadowGradientOpacity: 1,
+        fillShadowGradient: COLORS.PRIMARY_BLUE,
+        barPercentage: 0.5,
+        decimalPlaces: 2,
+        color: () => COLORS.PRIMARY_BLUE,
+        labelColor: () => COLORS.RED,
+        propsForBackgroundLines: {
+          strokeWidth: 1,
+          stroke: COLORS.DOGER_BLUE,
+          strokeDasharray: '4',
+        },
+      }}
+    />
   );
 }
-
-const styles = StyleSheet.create({});

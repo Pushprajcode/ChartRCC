@@ -11,5 +11,7 @@ const COLORS = {
   BLUE_MAGNETA: '#1A1A1B',
   SUMMER_SKY: '#39C0E0',
   VERYDARK_GREY: '#121212',
+  DOGER_BLUE: '#1E90FF',
+  SUMMER_BLUE: '#72FFFF',
 };
 export default COLORS;

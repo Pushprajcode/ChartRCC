@@ -1,13 +1,21 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import Index from './piechart';
+import PieScreen from './piechart';
+import COLORS from '../../utiles/colors';
 
 export default function PieChartScreen() {
   return (
     <View>
-      <Index height={300} />
+      <PieScreen
+        height={200}
+        width={400}
+        backgroundColor={COLORS.WHITE}
+        paddingLeft={'10'}
+      />
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  customPieStyle: {},
+});
