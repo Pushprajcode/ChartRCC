@@ -8,13 +8,13 @@ import TestScreen from '../screens/test';
 import FinalScreen from '../screens/finalScreen';
 
 export default function NavigationScreen() {
-  const Stack = createNativeStackNavigator();
+  const Stack: any = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name={ROUTE_NAME.HOME} component={HomeScreen} />
-        <Stack.Screen name={ROUTE_NAME.TEST} component={TestScreen} />
-        <Stack.Screen name={ROUTE_NAME.FINAL} component={FinalScreen} />
+        {/* <Stack.Screen name={ROUTE_NAME.TEST} component={TestScreen} /> */}
+        {/* <Stack.Screen name={ROUTE_NAME.FINAL} component={FinalScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
