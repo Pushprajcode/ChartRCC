@@ -19,11 +19,13 @@ interface Props {
   style?: ViewStyle;
   xAxisLabel?: string;
   yAxisLabel?: string;
+  data?: Array<number>;
   strokeWidth?: number;
   yAxisSuffix?: string;
   chartColor?: ColorType;
   labelColor?: ColorType;
   decimalPlaces?: number;
+  labels?: Array<string>;
   backgroundColor?: string;
   backgroundGradientTo?: string;
   backgroundGradientFrom?: string;
@@ -32,9 +34,30 @@ interface Props {
 }
 
 export default function LineChartComp(props: Props) {
-  const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June'];
-  const data = [10, 20, 30, 21, 40, 31];
-  let values: any = {
+  const {
+    style,
+    yAxisLabel,
+    xAxisLabel,
+    radius = 6,
+    width = 300,
+    height = 200,
+    bezier = true,
+    strokeWidth = 2,
+    backgroundColor,
+    stroke = 'green',
+    decimalPlaces = 2,
+    yAxisSuffix = '°C',
+    backgroundGradientTo,
+    backgroundGradientFrom,
+    backgroundGradientToOpacity,
+    labelColor = new ColorType(),
+    chartColor = new ColorType(),
+    backgroundGradientFromOpacity,
+    data = [10, 20, 30, 21, 40, 31],
+    labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June'],
+  } = props;
+
+  let values = {
     labels: labels,
     datasets: [
       {
@@ -45,26 +68,6 @@ export default function LineChartComp(props: Props) {
   if (props?.values) {
     values = props?.values;
   }
-  const {
-    style,
-    yAxisLabel,
-    xAxisLabel,
-    radius = 6,
-    yAxisSuffix,
-    width = 300,
-    height = 200,
-    bezier = true,
-    strokeWidth = 2,
-    backgroundColor,
-    stroke = 'green',
-    decimalPlaces = 2,
-    backgroundGradientTo,
-    backgroundGradientFrom,
-    backgroundGradientToOpacity,
-    labelColor = new ColorType(),
-    chartColor = new ColorType(),
-    backgroundGradientFromOpacity,
-  } = props;
 
   const generateChartColor = () => {
     return `rgba(${chartColor.red}, ${chartColor.green}, ${chartColor.blue}, ${chartColor.alpha})`;
@@ -89,17 +92,15 @@ export default function LineChartComp(props: Props) {
         decimalPlaces: decimalPlaces,
         backgroundColor: backgroundColor,
         backgroundGradientTo: backgroundGradientTo,
+        color: (opacity = 1) => generateChartColor(),
         backgroundGradientFrom: backgroundGradientFrom,
+        labelColor: (opacity = 1) => generateLabelColor(),
         backgroundGradientToOpacity: backgroundGradientToOpacity,
         backgroundGradientFromOpacity: backgroundGradientFromOpacity,
-        color: (opacity = 1) => generateChartColor(),
-        labelColor: (opacity = 1) => generateLabelColor(),
-        // color: (opacity = 0.6) => `rgba(255, 255, 0, ${opacity})`,
-        // labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
         propsForDots: {
           r: radius,
-          strokeWidth: strokeWidth,
           stroke: stroke,
+          strokeWidth: strokeWidth,
         },
       }}
     />
