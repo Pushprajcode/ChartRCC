@@ -1,48 +1,81 @@
 import {BarChart} from 'react-native-chart-kit';
 import {Dimensions, ViewStyle} from 'react-native';
 import React from 'react';
-import {AbstractChartConfig} from 'react-native-chart-kit/dist/AbstractChart';
-
 const screenWidth = Dimensions.get('window').width;
+class ColorType {
+  red: string = '255';
+  blue: string = '5';
+  green: string = '255';
+  alpha: string | number = '1';
+}
 interface BarchartProps {
-  initialChartConfig: AbstractChartConfig;
+  values?: object;
   verticalLabelRotation?: number;
   horizontalLabelRotation?: number;
-  yAxisSuffix: string;
-  yAxisLabel: string;
+  yAxisSuffix?: string;
+  yAxisLabel?: string;
   fromZero?: boolean;
-  BarchartData: any;
   height?: number;
   width?: number;
-  graphStyle?: Partial<ViewStyle>;
+  labels?: number[];
+  data?: string[];
+  graphStyle?: ViewStyle;
+  chartColor?: ColorType;
+  labelColor?: ColorType;
+  showValuesOnTopOfBars?: boolean;
 }
 
 export default function BarchartScreen(props: BarchartProps) {
   const {
-    horizontalLabelRotation = 3,
-    verticalLabelRotation = 4,
-    yAxisLabel = '$',
-    yAxisSuffix = 'k',
+    horizontalLabelRotation = 1,
+    verticalLabelRotation = 1,
+    yAxisLabel = '',
+    yAxisSuffix = '',
     fromZero = false,
-    height = 100,
-    graphStyle,
-    initialChartConfig,
-    BarchartData,
+    height = 400,
+    graphStyle = {marginTop: 50},
     width = screenWidth,
+    labelColor = new ColorType(),
+    chartColor = new ColorType(),
+    data = [10, 20, 30, 40, 50, 60],
+    labels = ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
+    showValuesOnTopOfBars = true,
   } = props;
-  console.log('first', graphStyle);
+  let values: any = {
+    labels: labels,
+    datasets: [
+      {
+        data: data,
+      },
+    ],
+  };
+  if (props?.values) {
+    values = props?.values;
+  }
+  const generateChartColor = () => {
+    return `rgba(${chartColor.red}, ${chartColor.green}, ${chartColor.blue}, ${chartColor.alpha})`;
+  };
+
+  const generateLabelColor = () => {
+    return `rgba(${labelColor.red}, ${labelColor.green}, ${labelColor.blue}, ${labelColor.alpha})`;
+  };
+
   return (
     <BarChart
-      data={BarchartData}
       width={width}
       height={height}
+      style={graphStyle}
+      data={values}
       yAxisLabel={yAxisLabel}
       yAxisSuffix={yAxisSuffix}
+      chartConfig={{
+        color: (_opacity = 1) => generateChartColor(),
+        labelColor: (_opacity = 1) => generateLabelColor(),
+      }}
+      fromZero={fromZero}
       verticalLabelRotation={verticalLabelRotation}
       horizontalLabelRotation={horizontalLabelRotation}
-      fromZero={fromZero} //optional prop
-      style={graphStyle}
-      chartConfig={initialChartConfig}
+      showValuesOnTopOfBars={showValuesOnTopOfBars}
     />
   );
 }

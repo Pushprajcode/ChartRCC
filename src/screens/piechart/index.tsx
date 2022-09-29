@@ -40,25 +40,25 @@ export const PieChartData = [
   },
 ];
 
-export default function PieChartScreen() {
-  return (
-    <SafeAreaView style={{flex: 1}}>
-      <PieScreen
-        height={200}
-        width={400}
-        backgroundColor={COLORS.WHITE}
-        paddingLeft={'10'}
-        strokeWidth={8}
-        barPercentage={0.6}
-        decimalPlaces={2}
-        style={{
-          borderRadius: 16,
-        }}
-        PieChartData={PieChartData}
-        initialChartConfig={{
-          color: opacity => `rgba(255, 255, 255, ${opacity})`,
-        }}
-      />
-    </SafeAreaView>
-  );
-}
+// export default function PieChartScreen() {
+//   return (
+//     <SafeAreaView style={{flex: 1}}>
+//       <PieScreen
+//         // height={200}
+//         // width={400}
+//         // backgroundColor={COLORS.WHITE}
+//         // paddingLeft={'10'}
+//         // strokeWidth={8}
+//         // barPercentage={0.6}
+//         // decimalPlaces={2}
+//         // style={{
+//         //   borderRadius: 16,
+//         // }}
+//         PieChartData={PieChartData}
+//         // initialChartConfig={{
+//         //   color: opacity => `rgba(255, 255, 255, ${opacity})`,
+//         // }}
+//       />
+//     </SafeAreaView>
+//   );
+// }
