@@ -28,7 +28,9 @@ interface Props {
   labels?: Array<string>;
   backgroundColor?: string;
   backgroundGradientTo?: string;
+  verticalLabelRotation?: number;
   backgroundGradientFrom?: string;
+  horizontalLabelRotation?: number;
   backgroundGradientToOpacity?: number;
   backgroundGradientFromOpacity?: number;
 }
@@ -48,7 +50,9 @@ export default function LineChartComp(props: Props) {
     decimalPlaces = 2,
     yAxisSuffix = '°C',
     backgroundGradientTo,
+    verticalLabelRotation,
     backgroundGradientFrom,
+    horizontalLabelRotation,
     backgroundGradientToOpacity,
     labelColor = new ColorType(),
     chartColor = new ColorType(),
@@ -88,6 +92,8 @@ export default function LineChartComp(props: Props) {
       xAxisLabel={xAxisLabel}
       yAxisLabel={yAxisLabel}
       yAxisSuffix={yAxisSuffix}
+      verticalLabelRotation={verticalLabelRotation}
+      horizontalLabelRotation={horizontalLabelRotation}
       chartConfig={{
         decimalPlaces: decimalPlaces,
         backgroundColor: backgroundColor,
