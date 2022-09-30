@@ -1,12 +1,20 @@
 import {BarChart} from 'react-native-chart-kit';
 import {Dimensions, ViewStyle} from 'react-native';
 import React from 'react';
+import COLORS from '../../utiles/colors';
 const screenWidth = Dimensions.get('window').width;
 class ColorType {
-  red: string = '255';
-  blue: string = '5';
-  green: string = '255';
+  red: string = '220';
+  blue: string = '20';
+  green: string = '60';
   alpha: string | number = '1';
+}
+
+class LabelColorType {
+  red: string = '250';
+  blue: string = '295';
+  green: string = '285';
+  alpha: string | number = '';
 }
 interface BarchartProps {
   values?: object;
@@ -21,8 +29,13 @@ interface BarchartProps {
   data?: string[];
   graphStyle?: ViewStyle;
   chartColor?: ColorType;
-  labelColor?: ColorType;
+  labelColor?: LabelColorType;
   showValuesOnTopOfBars?: boolean;
+  withInnerLines?: boolean;
+  backgroundColor?: string;
+  barPercentag?: number;
+  decimalPlaces?: number;
+  flatColor?: boolean;
 }
 
 export default function BarchartScreen(props: BarchartProps) {
@@ -40,7 +53,12 @@ export default function BarchartScreen(props: BarchartProps) {
     data = [10, 20, 30, 40, 50, 60],
     labels = ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
     showValuesOnTopOfBars = true,
+    withInnerLines = true,
+    barPercentag = 1,
+    decimalPlaces = 2,
+    flatColor = false,
   } = props;
+
   let values: any = {
     labels: labels,
     datasets: [
@@ -71,11 +89,18 @@ export default function BarchartScreen(props: BarchartProps) {
       chartConfig={{
         color: (_opacity = 1) => generateChartColor(),
         labelColor: (_opacity = 1) => generateLabelColor(),
+        backgroundColor: COLORS.DOGER_BLUE,
+        backgroundGradientFrom: COLORS.DOGER_BLUE,
+        backgroundGradientTo: COLORS.DOGER_BLUE,
+        decimalPlaces: decimalPlaces,
+        barPercentage: barPercentag,
       }}
       fromZero={fromZero}
       verticalLabelRotation={verticalLabelRotation}
       horizontalLabelRotation={horizontalLabelRotation}
       showValuesOnTopOfBars={showValuesOnTopOfBars}
+      withInnerLines={withInnerLines}
+      flatColor={flatColor}
     />
   );
 }

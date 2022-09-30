@@ -1,14 +1,13 @@
-import {View, ViewStyle} from 'react-native';
+import {ViewStyle} from 'react-native';
 import React from 'react';
 import {PieChart} from 'react-native-chart-kit';
 import COLORS from '../../utiles/colors';
-// import {PieChartData} from '.';
 import {PieChartData} from '.';
 class ColorType {
-  red: string = '255';
-  blue: string = '5';
-  green: string = '255';
-  alpha: string | number = '1';
+  red: string = '204';
+  blue: string = '155';
+  green: string = '153';
+  alpha: string | number = '4';
 }
 interface PiechartProps {
   width?: number;
@@ -19,27 +18,33 @@ interface PiechartProps {
   barPercentage?: number;
   decimalPlaces?: number;
   style?: ViewStyle;
-  // PieChartData?: any;
   chartColor?: ColorType;
   labelColor?: ColorType;
+  propdata?: any;
+  graphStyle?: ViewStyle;
+  hasLegend?: boolean;
+  center?: Array<number>;
+  absolute?: boolean;
+  avoidFalseZero?: boolean;
 }
-export default function PieScreen(props: PiechartProps) {
+export default function PieChartScreen(props: PiechartProps) {
   const {
     width = 400,
     height = 200,
-    backgroundColor = '#0fffff',
+    backgroundColor = COLORS.DOGER_BLUE,
     paddingLeft = '10',
-    // PieChartData,
     labelColor = new ColorType(),
     chartColor = new ColorType(),
+    propdata,
+    hasLegend = true,
+    graphStyle = {marginTop: 40},
+    center = [5, 10],
+    absolute = false,
+    avoidFalseZero = true,
   } = props;
-  // console.log('data to ', props);
-  // if (props != '') {
-  // }
-  console.log('------->', PieChartData);
-
   const generateChartColor = () => {
-    return `rgba(${chartColor.red}, ${chartColor.green}, ${chartColor.blue}, ${chartColor.alpha})`;
+    // return `rgba(${chartColor.red}, ${chartColor.green}, ${chartColor.blue}, ${chartColor.alpha})`;
+    return '';
   };
 
   const generateLabelColor = () => {
@@ -47,16 +52,22 @@ export default function PieScreen(props: PiechartProps) {
   };
   return (
     <PieChart
-      width={width}
-      height={height}
-      accessor={'population'}
+      data={propdata ? propdata : PieChartData}
       backgroundColor={backgroundColor}
       paddingLeft={paddingLeft}
-      data={PieChartData}
+      height={height}
+      width={width}
+      hasLegend={hasLegend}
+      accessor={'population'}
       chartConfig={{
-        color: (_opacity = 1) => generateChartColor(),
-        labelColor: (_opacity = 1) => generateLabelColor(),
+        color: (_opacity = 1, _index) => generateChartColor(),
+        // labelColor: (_opacity = 1) => generateLabelColor(),
+        decimalPlaces: 4, // optional, defaults to 2dp
       }}
+      style={graphStyle}
+      avoidFalseZero={avoidFalseZero}
+      center={center}
+      absolute={absolute}
     />
   );
 }

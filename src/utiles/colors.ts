@@ -13,5 +13,6 @@ const COLORS = {
   VERYDARK_GREY: '#121212',
   DOGER_BLUE: '#1E90FF',
   SUMMER_BLUE: '#72FFFF',
+  ORANGE: 'orange',
 };
 export default COLORS;
