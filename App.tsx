@@ -57,7 +57,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import PieChartScreen from './src/screens/piechart/piechart';
 import BarchartScreen from './src/screens/barchart/barchart';
-import COLORS from './src/utiles/colors';
+import COLORS from './src/utils/colors';
 
 export default function App() {
   return (

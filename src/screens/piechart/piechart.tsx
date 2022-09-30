@@ -1,7 +1,7 @@
 import {ViewStyle} from 'react-native';
 import React from 'react';
 import {PieChart} from 'react-native-chart-kit';
-import COLORS from '../../utiles/colors';
+import COLORS from '../../utils/colors';
 import {PieChartData} from '.';
 class ColorType {
   red: string = '204';

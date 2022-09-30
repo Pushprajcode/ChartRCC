@@ -1,7 +1,7 @@
 import {BarChart} from 'react-native-chart-kit';
 import {Dimensions, ViewStyle} from 'react-native';
 import React from 'react';
-import COLORS from '../../utiles/colors';
+import COLORS from '../../utils/colors';
 const screenWidth = Dimensions.get('window').width;
 class ColorType {
   red: string = '220';

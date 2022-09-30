@@ -1,4 +1,4 @@
-import COLORS from '../../utiles/colors';
+import COLORS from '../../utils/colors';
 export const PieChartData = [
   {
     name: 'Seoul',
