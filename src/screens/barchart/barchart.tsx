@@ -1,5 +1,5 @@
 import {BarChart} from 'react-native-chart-kit';
-import {Dimensions, ViewStyle} from 'react-native';
+import {Dimensions, View, ViewStyle} from 'react-native';
 import React from 'react';
 import COLORS from '../../utils/colors';
 const screenWidth = Dimensions.get('window').width;
@@ -36,6 +36,7 @@ interface BarchartProps {
   barPercentag?: number;
   decimalPlaces?: number;
   flatColor?: boolean;
+  graphStyleView?: ViewStyle;
 }
 
 export default function BarchartScreen(props: BarchartProps) {
@@ -45,7 +46,7 @@ export default function BarchartScreen(props: BarchartProps) {
     yAxisLabel = '',
     yAxisSuffix = '',
     fromZero = false,
-    height = 400,
+    height = 300,
     graphStyle = {marginTop: 50},
     width = screenWidth,
     labelColor = new ColorType(),
@@ -57,6 +58,7 @@ export default function BarchartScreen(props: BarchartProps) {
     barPercentag = 1,
     decimalPlaces = 2,
     flatColor = false,
+    graphStyleView,
   } = props;
 
   let values: any = {
@@ -79,28 +81,41 @@ export default function BarchartScreen(props: BarchartProps) {
   };
 
   return (
-    <BarChart
-      width={width}
-      height={height}
-      style={graphStyle}
-      data={values}
-      yAxisLabel={yAxisLabel}
-      yAxisSuffix={yAxisSuffix}
-      chartConfig={{
-        color: (_opacity = 1) => generateChartColor(),
-        labelColor: (_opacity = 1) => generateLabelColor(),
-        backgroundColor: COLORS.DOGER_BLUE,
-        backgroundGradientFrom: COLORS.DOGER_BLUE,
-        backgroundGradientTo: COLORS.DOGER_BLUE,
-        decimalPlaces: decimalPlaces,
-        barPercentage: barPercentag,
-      }}
-      fromZero={fromZero}
-      verticalLabelRotation={verticalLabelRotation}
-      horizontalLabelRotation={horizontalLabelRotation}
-      showValuesOnTopOfBars={showValuesOnTopOfBars}
-      withInnerLines={withInnerLines}
-      flatColor={flatColor}
-    />
+    <View
+      style={[
+        {
+          height: 300,
+          width: '90%',
+          marginTop: 10,
+          alignItems: 'center',
+          marginLeft: 14,
+          borderRadius: 30,
+        },
+        graphStyleView,
+      ]}>
+      <BarChart
+        width={width}
+        height={height}
+        style={graphStyle}
+        data={values}
+        yAxisLabel={yAxisLabel}
+        yAxisSuffix={yAxisSuffix}
+        chartConfig={{
+          color: (_opacity = 1) => generateChartColor(),
+          labelColor: (_opacity = 1) => generateLabelColor(),
+          backgroundColor: COLORS.DOGER_BLUE,
+          backgroundGradientFrom: COLORS.DOGER_BLUE,
+          backgroundGradientTo: COLORS.DOGER_BLUE,
+          decimalPlaces: decimalPlaces,
+          barPercentage: barPercentag,
+        }}
+        fromZero={fromZero}
+        verticalLabelRotation={verticalLabelRotation}
+        horizontalLabelRotation={horizontalLabelRotation}
+        showValuesOnTopOfBars={showValuesOnTopOfBars}
+        withInnerLines={withInnerLines}
+        flatColor={flatColor}
+      />
+    </View>
   );
 }

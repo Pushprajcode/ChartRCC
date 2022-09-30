@@ -1,4 +1,4 @@
-import {ViewStyle} from 'react-native';
+import {StyleProp, Text, TextStyle, View, ViewStyle} from 'react-native';
 import React from 'react';
 import {PieChart} from 'react-native-chart-kit';
 import COLORS from '../../utils/colors';
@@ -7,7 +7,7 @@ class ColorType {
   red: string = '204';
   blue: string = '155';
   green: string = '153';
-  alpha: string | number = '4';
+  alpha: string | number = '1';
 }
 interface PiechartProps {
   width?: number;
@@ -26,49 +26,105 @@ interface PiechartProps {
   center?: Array<number>;
   absolute?: boolean;
   avoidFalseZero?: boolean;
+  legendStyle?: StyleProp<TextStyle>;
+  legendStyleView?: StyleProp<ViewStyle>;
+  graphStyleView?: ViewStyle;
 }
+
 export default function PieChartScreen(props: PiechartProps) {
   const {
-    width = 400,
-    height = 200,
+    width = 180,
+    height = 180,
     backgroundColor = COLORS.DOGER_BLUE,
     paddingLeft = '10',
     labelColor = new ColorType(),
     chartColor = new ColorType(),
-    propdata,
+    propdata = PieChartData,
     hasLegend = true,
-    graphStyle = {marginTop: 40},
-    center = [5, 10],
+    graphStyle = {},
+    center = [30, 0],
     absolute = false,
     avoidFalseZero = true,
+    legendStyle = {},
+    legendStyleView,
+    graphStyleView,
   } = props;
   const generateChartColor = () => {
-    // return `rgba(${chartColor.red}, ${chartColor.green}, ${chartColor.blue}, ${chartColor.alpha})`;
-    return '';
+    return `rgba(${chartColor.red}, ${chartColor.green}, ${chartColor.blue}, ${chartColor.alpha})`;
   };
 
   const generateLabelColor = () => {
     return `rgba(${labelColor.red}, ${labelColor.green}, ${labelColor.blue}, ${labelColor.alpha})`;
   };
+  let value = propdata?.reduce((previousValue: any, currentValue: any) => {
+    return previousValue + currentValue.population;
+  }, 0);
   return (
-    <PieChart
-      data={propdata ? propdata : PieChartData}
-      backgroundColor={backgroundColor}
-      paddingLeft={paddingLeft}
-      height={height}
-      width={width}
-      hasLegend={hasLegend}
-      accessor={'population'}
-      chartConfig={{
-        color: (_opacity = 1, _index) => generateChartColor(),
-        // labelColor: (_opacity = 1) => generateLabelColor(),
-        decimalPlaces: 4, // optional, defaults to 2dp
-      }}
-      style={graphStyle}
-      avoidFalseZero={avoidFalseZero}
-      center={center}
-      absolute={absolute}
-    />
+    <View
+      style={[
+        {
+          flexDirection: 'row',
+          height: 300,
+          width: '90%',
+          marginTop: 40,
+          backgroundColor: backgroundColor,
+          alignItems: 'center',
+          marginLeft: 12,
+          borderRadius: 20,
+        },
+        graphStyleView,
+      ]}>
+      <PieChart
+        data={propdata}
+        backgroundColor={backgroundColor}
+        paddingLeft={paddingLeft}
+        height={height}
+        width={width}
+        hasLegend={false}
+        accessor={'population'}
+        chartConfig={{
+          color: (_opacity = 1, _index) => generateChartColor(),
+        }}
+        style={graphStyle}
+        avoidFalseZero={avoidFalseZero}
+        center={center}
+        absolute={false}
+      />
+      {hasLegend ? (
+        <View>
+          {propdata.map((item: any, index: number) => {
+            const percentage = parseFloat(
+              ((item.population * 100) / value).toFixed(2),
+            );
+            return (
+              <View
+                key={index}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={[
+                    {
+                      height: 10,
+                      width: 10,
+                      borderRadius: 5,
+                      backgroundColor: item.color,
+                      marginRight: '8%',
+                    },
+                    legendStyleView,
+                  ]}
+                />
+                <Text style={[{width: '30%'}, legendStyle]}>
+                  {percentage >= 1 ? percentage + `% ` : '<1%'}
+                </Text>
+                <Text style={[legendStyle]}>{item?.name}</Text>
+              </View>
+            );
+          })}
+        </View>
+      ) : null}
+    </View>
   );
 }
 //
