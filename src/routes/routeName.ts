@@ -1,6 +1,7 @@
 const ROUTE_NAME = {
   HOME: 'HomeScreen',
-  TEST: 'TestScreen',
-  FINAL: 'FinalScreen',
+  PIECHARTSCREEN: 'PieChartScreen',
+  LINECHARTSCREEN: 'LineChartScreen',
+  BARCHARTSCREEN: 'BarChartScreen',
 };
 export default ROUTE_NAME;

@@ -35,7 +35,7 @@ interface Props {
   backgroundGradientFromOpacity?: number;
 }
 
-export default function LineChartComp(props: Props) {
+export default function LineChartScreen(props: Props) {
   const {
     style,
     yAxisLabel,
