@@ -37,7 +37,6 @@ export default function PieChartScreen(props: PiechartProps) {
     height = 180,
     backgroundColor = COLORS.DOGER_BLUE,
     paddingLeft = '10',
-    labelColor = new ColorType(),
     chartColor = new ColorType(),
     propdata = PieChartData,
     hasLegend = true,
@@ -53,9 +52,6 @@ export default function PieChartScreen(props: PiechartProps) {
     return `rgba(${chartColor.red}, ${chartColor.green}, ${chartColor.blue}, ${chartColor.alpha})`;
   };
 
-  const generateLabelColor = () => {
-    return `rgba(${labelColor.red}, ${labelColor.green}, ${labelColor.blue}, ${labelColor.alpha})`;
-  };
   let value = propdata?.reduce((previousValue: any, currentValue: any) => {
     return previousValue + currentValue.population;
   }, 0);
@@ -127,4 +123,3 @@ export default function PieChartScreen(props: PiechartProps) {
     </View>
   );
 }
-//

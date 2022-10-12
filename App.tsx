@@ -8,9 +8,9 @@ import COLORS from './src/utils/colors';
 export default function App() {
   return (
     <View style={{flex: 1}}>
-      <PieChartScreen />
-      <BarchartScreen />
-      {/* <LineChartComp /> */}
+      {/* <PieChartScreen /> */}
+      {/* <BarchartScreen /> */}
+      <LineChartComp />
     </View>
   );
 }

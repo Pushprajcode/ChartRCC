@@ -17,11 +17,11 @@ interface Props {
   height?: number;
   bezier?: boolean;
   style?: ViewStyle;
-  xAxisLabel?: string;
   yAxisLabel?: string;
-  data?: Array<number>;
   strokeWidth?: number;
   yAxisSuffix?: string;
+  xAxisLabel?: string;
+  data?: Array<number>;
   chartColor?: ColorType;
   labelColor?: ColorType;
   decimalPlaces?: number;
@@ -98,9 +98,9 @@ export default function LineChartComp(props: Props) {
         decimalPlaces: decimalPlaces,
         backgroundColor: backgroundColor,
         backgroundGradientTo: backgroundGradientTo,
-        color: (opacity = 1) => generateChartColor(),
+        color: (_opacity = 1) => generateChartColor(),
         backgroundGradientFrom: backgroundGradientFrom,
-        labelColor: (opacity = 1) => generateLabelColor(),
+        labelColor: (_opacity = 1) => generateLabelColor(),
         backgroundGradientToOpacity: backgroundGradientToOpacity,
         backgroundGradientFromOpacity: backgroundGradientFromOpacity,
         propsForDots: {
